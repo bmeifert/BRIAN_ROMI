@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.sensors.RomiGyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.OperatorControl;
 
 public class Drivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
@@ -40,6 +41,11 @@ public class Drivetrain extends SubsystemBase {
     m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     resetEncoders();
+  }
+
+  public void initDefaultCommand() {
+      setDefaultCommand(new OperatorControl(this));
+      System.out.println("initDefaultCommand(OperatorControl(this));\n");
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
